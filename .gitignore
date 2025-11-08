@@ -1,15 +1,25 @@
+# Unity
 [Ll]ibrary/
 [Tt]emp/
 [Oo]bj/
-[Bb]uild*/ 
+[Bb]uild*/
+[Bb]uilds/
 [Ll]ogs/
-UserSettings/
+[Uu]ser[Ss]ettings/
 MemoryCaptures/
+ProjectSettings/Packages/com.unity.testtools.codecoverage/   # 若无可删
+
+# IDE & tooling
+.vs/
+.vscode/
+.idea/
 *.csproj
 *.sln
 *.user
 *.pidb
 *.opendb
 *.VC.db
-.idea/
-.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
