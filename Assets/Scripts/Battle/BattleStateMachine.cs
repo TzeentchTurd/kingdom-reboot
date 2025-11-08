@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using FlowTrace;
 using Game.Flow;
+using Game.Dialogue;
 
 namespace Game.Battle
 {
@@ -40,6 +41,7 @@ namespace Game.Battle
             var resolution = new ResolutionState();
             yield return RunState(resolution, resolutionDuration);
 
+            BarkPlayer.Play("onBattleEnd", new BarkContext());
             BattleFlowTracer.LogBattleEndOk();
         }
 

@@ -4,6 +4,7 @@ using FlowTrace;
 using Game.Juice;
 using Game.Flow;
 using Game.Config;
+using Game.Dialogue;
 
 namespace Game.Battle
 {
@@ -147,6 +148,12 @@ namespace Game.Battle
                     }
                 }
                 BattleFlowTracer.Trace("Downed", $"Team{tgt.team} {tgt.arch?.name ?? "Unit"} downed");
+                BarkPlayer.Play("onUnitDowned", new BarkContext
+                {
+                    unit = tgt.arch?.name ?? "Unit",
+                    dmg = dmg,
+                    essence = 0
+                });
             }
         }
 
