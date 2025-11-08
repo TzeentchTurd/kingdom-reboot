@@ -40,7 +40,7 @@ namespace Game.Battle
             var resolution = new ResolutionState();
             yield return RunState(resolution, resolutionDuration);
 
-            BattleFlowTracer.LogBattleEnd();
+            BattleFlowTracer.LogBattleEndOk();
         }
 
         private static IEnumerator RunState(IBattleState state, float duration)
@@ -109,4 +109,3 @@ namespace Game.Battle
         public void Exit() => BattleFlowTracer.TraceStateExit(nameof(ResolutionState));
     }
 }
-

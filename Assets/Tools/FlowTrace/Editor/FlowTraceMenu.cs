@@ -17,6 +17,8 @@ namespace FlowTraceEditor
         [MenuItem("Tools/FlowTrace/Run Battle Smoke")]
         public static void RunBattleSmoke()
         {
+            // Clear previous trace log before starting
+            BattleFlowTracer.ClearLogFile();
             EnsureBoardsFolder();
             var battlePrefab = EnsureBattleBoardPrefab();
             var eventPrefab = EnsureEventBoardPrefab();
@@ -126,6 +128,11 @@ namespace FlowTraceEditor
             var sm = root.GetComponent<BattleStateMachine>();
             if (sm == null) sm = root.AddComponent<BattleStateMachine>();
 
+            // Ensure watchdog exists and enabled
+            var watchdog = root.GetComponent<BattleSmokeWatchdog>();
+            if (watchdog == null) watchdog = root.AddComponent<BattleSmokeWatchdog>();
+            watchdog.enabled = true;
+
             EditorSceneManager.MarkSceneDirty(scene);
         }
 
@@ -140,4 +147,3 @@ namespace FlowTraceEditor
         }
     }
 }
-
