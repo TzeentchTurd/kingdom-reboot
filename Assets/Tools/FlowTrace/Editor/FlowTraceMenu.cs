@@ -38,7 +38,7 @@ namespace FlowTraceEditor
             {
                 EditorApplication.playModeStateChanged -= OnPlayModeChanged;
                 // Try to trigger an early load (state machine will also load during BattleBoardState)
-                var seq = Object.FindObjectOfType<StageSequencer>();
+                var seq = UnityEngine.Object.FindFirstObjectByType<StageSequencer>();
                 seq?.LoadBattleBoard();
             }
         }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using FlowTrace;
+using Game.Juice;
 using Game.Flow;
 using Game.Config;
 
@@ -126,6 +127,13 @@ namespace Game.Battle
         private void ApplyDamage(UnitRuntime src, UnitRuntime tgt, float dmg)
         {
             if (tgt.downed) return;
+            // Juice: hitstop + shake + damage number + trace
+            var cfg = JuiceConfig.Instance;
+            HitStop.Trigger(cfg != null ? cfg.hitStopMs : 80);
+            ScreenShake.Shake(cfg != null ? cfg.shakeAmplitude : 0.2f, cfg != null ? cfg.shakeDuration : 0.15f);
+            if (tgt.tf != null)
+                DamageNumber.Spawn(tgt.tf.position, dmg);
+            BattleFlowTracer.Trace("Juice", $"hit a={dmg}");
             tgt.hp -= dmg;
             if (tgt.hp <= 0f)
             {
