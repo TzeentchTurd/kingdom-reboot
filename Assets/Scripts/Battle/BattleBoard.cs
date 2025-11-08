@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using FlowTrace;
+using Game.Juice;
 using Game.Flow;
 using Game.Config;
+using Game.Dialogue;
 
 namespace Game.Battle
 {
@@ -126,6 +128,13 @@ namespace Game.Battle
         private void ApplyDamage(UnitRuntime src, UnitRuntime tgt, float dmg)
         {
             if (tgt.downed) return;
+            // Juice: hitstop + shake + damage number + trace
+            var cfg = JuiceConfig.Instance;
+            HitStop.Trigger(cfg != null ? cfg.hitStopMs : 80);
+            ScreenShake.Shake(cfg != null ? cfg.shakeAmplitude : 0.2f, cfg != null ? cfg.shakeDuration : 0.15f);
+            if (tgt.tf != null)
+                DamageNumber.Spawn(tgt.tf.position, dmg);
+            BattleFlowTracer.Trace("Juice", $"hit a={dmg}");
             tgt.hp -= dmg;
             if (tgt.hp <= 0f)
             {
@@ -139,6 +148,12 @@ namespace Game.Battle
                     }
                 }
                 BattleFlowTracer.Trace("Downed", $"Team{tgt.team} {tgt.arch?.name ?? "Unit"} downed");
+                BarkPlayer.Play("onUnitDowned", new BarkContext
+                {
+                    unit = tgt.arch?.name ?? "Unit",
+                    dmg = dmg,
+                    essence = 0
+                });
             }
         }
 

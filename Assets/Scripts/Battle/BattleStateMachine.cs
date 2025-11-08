@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using FlowTrace;
 using Game.Flow;
+using Game.Dialogue;
 
 namespace Game.Battle
 {
@@ -40,7 +41,8 @@ namespace Game.Battle
             var resolution = new ResolutionState();
             yield return RunState(resolution, resolutionDuration);
 
-            BattleFlowTracer.LogBattleEnd();
+            BarkPlayer.Play("onBattleEnd", new BarkContext());
+            BattleFlowTracer.LogBattleEndOk();
         }
 
         private static IEnumerator RunState(IBattleState state, float duration)
@@ -109,4 +111,3 @@ namespace Game.Battle
         public void Exit() => BattleFlowTracer.TraceStateExit(nameof(ResolutionState));
     }
 }
-
