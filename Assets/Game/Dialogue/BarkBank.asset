@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 924821d1df9c4a047ba364b787be1bd9, type: 3}
+  m_Name: BarkBank
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Dialogue.BarkBank
+  onUnitDowned:
+  - '{unit} is down! Hold the line!'
+  - "{unit} took {dmg} \u2014 stay with us!"
+  - '{unit} downed. Patch them up, now!'
+  onExtractionComplete:
+  - 'Extraction complete. Essence secured: {essence}.'
+  - Payload locked. {essence} essence accounted for.
+  - "We\u2019re clear. {essence} essence on board."
+  onBattleEnd:
+  - Route closed. Good work.
+  - Engagement concluded. Re-org in 10.
+  - "That\u2019s a wrap. Debrief incoming."
